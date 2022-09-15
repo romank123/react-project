@@ -28,6 +28,15 @@
   color: #61dafb;
 }
 
+form {
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
+input {
+  margin: 1rem 0 !important;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

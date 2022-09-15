@@ -1,21 +1,26 @@
 import { useEffect, useState } from "react";
+import Box from "@material-ui/core/Box";
+import Input from "@material-ui/core/Input";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+
 import "./App.css";
 
 function App() {
   const [messageList, setMessageList] = useState([]);
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    const target = event.target;
-    const author = target.author.value;
-    const text = target.text.value;
+    // event.preventDefault();
+    // const target = event.target;
+    //const author = target.author.value;
+    //const text = target.text.value;
 
     setMessageList((prevState) => [
       ...prevState,
       {
         id: giveLastId(prevState),
-        author: author,
-        text: text,
+        //author: author,
+        //text: text,
       },
     ]);
   };
@@ -46,11 +51,27 @@ function App() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input type='text' name='author'></input>
-        <input type='text' name='text'></input>
-        <input type='submit' value='отправить'></input>
-      </form>
+      <Box component='form' noValidate autoComplete='off'>
+        <TextField
+          placeholder='автор'
+          name='author'
+          autoFocus
+          label={"Автор"}
+        />
+        {/* <input type='text' name='author'></input> */}
+        {/* <input type='text' name='text'></input> */}
+        <br></br>
+        <TextField placeholder='текст' name='text' autoFocus label={"Текст"} />
+        <br></br>
+        <Button
+          variant='contained'
+          style={{ marginTop: "1rem" }}
+          onClick={handleSubmit}
+        >
+          Отправить
+        </Button>
+      </Box>
+
       {messageList.map((message) => {
         return (
           <div key={message.id}>
