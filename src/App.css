@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+}
+
+.menu li {
+  margin: 0 1rem;
+}
+
+.menu a {
+  text-decoration: none;
+  color: black;
+  display: inline-block;
+}

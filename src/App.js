@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import { Route, Link, Routes } from "react-router-dom";
+
+import Home from "./components/Home";
+import Profile from "./components/Profile";
 
 function App() {
   const [messageList, setMessageList] = useState([]);
@@ -46,6 +50,24 @@ function App() {
 
   return (
     <div>
+      <div className='menu'>
+        <ul>
+          <li>
+            <Link to='/'>Главная</Link>
+          </li>
+          <li>
+            <Link to='/profile'>Профиль</Link>
+          </li>
+        </ul>
+      </div>
+
+      <div className='App-intro'>
+        <Routes>
+          <Route exact path='/' component={Home} />
+          <Route path='/profile' component={Profile} />
+        </Routes>
+      </div>
+
       <form onSubmit={handleSubmit}>
         <input type='text' name='author'></input>
         <input type='text' name='text'></input>
