@@ -89,15 +89,15 @@ function Home() {
         );
       })}
       <div>
-        <button onClick={this.decrement}>-</button>
+        <button onClick={decrement}>-</button>
         <span>{count}</span>
-        <button onClick={this.increment}>+</button>
+        <button onClick={increment}>+</button>
         <button onClick={reset}>reset</button>
         <span>Step: </span>
         <input
           type='text'
           defaultValue={this.state.step}
-          onChange={this.andleChange}
+          onChange={this.handleChange}
         />
       </div>
     </div>
