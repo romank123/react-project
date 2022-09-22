@@ -6,9 +6,8 @@ import { increment, decrement, reset } from "../actions/counterActions";
 function Home() {
   let state = {
     step: 3,
+    count: 0,
   };
-
-  const { count, reset } = this.props;
 
   const increment = () => {
     this.props.increment(this.state.step);
@@ -90,15 +89,11 @@ function Home() {
       })}
       <div>
         <button onClick={decrement}>-</button>
-        <span>{count}</span>
+        <span>{state.count}</span>
         <button onClick={increment}>+</button>
         <button onClick={reset}>reset</button>
         <span>Step: </span>
-        <input
-          type='text'
-          defaultValue={this.state.step}
-          onChange={this.handleChange}
-        />
+        <input type='text' defaultValue={state.step} onChange={handleChange} />
       </div>
     </div>
   );
