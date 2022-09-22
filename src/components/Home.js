@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import { Route, Link, Routes } from "react-router-dom";
-//import { increment, decrement, reset } from "../actions/counterActions";
-
 import { useSelector, useDispatch } from "react-redux";
-//import { decrement, increment, reset } from "./redux/actions/index";
 import { decrement, increment, reset } from "../actions/counterActions";
 
 function Home() {
@@ -76,9 +73,9 @@ function Home() {
       })}
       <h3>Counter</h3>
       <h3>{counter}</h3>
-      <button onClick={() => dispatch(increment())}>Increase</button>
+      <button onClick={() => dispatch(increment())}>+</button>
       <button onClick={() => dispatch(reset())}>Reset</button>
-      <button onClick={() => dispatch(decrement())}>Decrease</button>
+      <button onClick={() => dispatch(decrement())}>-</button>
     </div>
   );
 }
