@@ -1,7 +1,26 @@
 import { useEffect, useState } from "react";
 import { Route, Link, Routes } from "react-router-dom";
+import { connect } from "react-redux";
+import { increment, decrement, reset } from "../actions/counterActions";
 
 function Home() {
+  let state = {
+    step: 3,
+  };
+  const increment = () => {
+    this.props.increment(this.state.step);
+  };
+
+  const decrement = () => {
+    this.props.decrement(this.state.step);
+  };
+
+  const handleChange = (e) => {
+    this.setState({
+      step: +e.target.value,
+    });
+  };
+
   const [messageList, setMessageList] = useState([]);
 
   const handleSubmit = (event) => {
@@ -44,6 +63,8 @@ function Home() {
     }, 2000);
   }, [messageList]);
 
+  const { count, reset } = this.props;
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -66,6 +87,18 @@ function Home() {
           </div>
         );
       })}
+      <div>
+        <button onClick={this.decrement}>-</button>
+        <span>{count}</span>
+        <button onClick={this.increment}>+</button>
+        <button onClick={reset}>reset</button>
+        <span>Step: </span>
+        <input
+          type='text'
+          defaultValue={this.state.step}
+          onChange={this.andleChange}
+        />
+      </div>
     </div>
   );
 }
