@@ -7,6 +7,9 @@ function Home() {
   let state = {
     step: 3,
   };
+
+  const { count, reset } = this.props;
+
   const increment = () => {
     this.props.increment(this.state.step);
   };
@@ -62,8 +65,6 @@ function Home() {
       botAnswer();
     }, 2000);
   }, [messageList]);
-
-  const { count, reset } = this.props;
 
   return (
     <div>
