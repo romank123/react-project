@@ -1,28 +1,12 @@
 import { useEffect, useState } from "react";
 import { Route, Link, Routes } from "react-router-dom";
-import { connect } from "react-redux";
-import { increment, decrement, reset } from "../actions/counterActions";
+//import { increment, decrement, reset } from "../actions/counterActions";
+
+import { useSelector, useDispatch } from "react-redux";
+//import { decrement, increment, reset } from "./redux/actions/index";
+import { decrement, increment, reset } from "../actions/counterActions";
 
 function Home() {
-  let state = {
-    step: 3,
-    count: 0,
-  };
-
-  const increment = () => {
-    this.props.increment(this.state.step);
-  };
-
-  const decrement = () => {
-    this.props.decrement(this.state.step);
-  };
-
-  const handleChange = (e) => {
-    this.setState({
-      step: +e.target.value,
-    });
-  };
-
   const [messageList, setMessageList] = useState([]);
 
   const handleSubmit = (event) => {
@@ -65,6 +49,9 @@ function Home() {
     }, 2000);
   }, [messageList]);
 
+  const counter = useSelector((state) => state.counter);
+  const dispatch = useDispatch();
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -87,14 +74,11 @@ function Home() {
           </div>
         );
       })}
-      <div>
-        <button onClick={decrement}>-</button>
-        <span>{state.count}</span>
-        <button onClick={increment}>+</button>
-        <button onClick={reset}>reset</button>
-        <span>Step: </span>
-        <input type='text' defaultValue={state.step} onChange={handleChange} />
-      </div>
+      <h3>Counter</h3>
+      <h3>{counter}</h3>
+      <button onClick={() => dispatch(increment())}>Increase</button>
+      <button onClick={() => dispatch(reset())}>Reset</button>
+      <button onClick={() => dispatch(decrement())}>Decrease</button>
     </div>
   );
 }

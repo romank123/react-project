@@ -1,17 +1,13 @@
-import { INCREMENT, DECREMENT, RESET } from "../actions/counterActions";
-import { initialState } from "../store/store";
-
-function reducer(state, action) {
+const counterReducer = (state = 1, action) => {
   switch (action.type) {
-    case INCREMENT:
-      return { count: state.count + action.amount };
-    case DECREMENT:
-      return { count: state.count - action.amount };
-    case RESET:
-      return initialState;
+    case "INCREMENT":
+      return state + 1;
+    case "DECREMENT":
+      return state - 1;
+    case "RESET":
+      return (state = 0);
     default:
       return state;
   }
-}
-
-export default reducer;
+};
+export default counterReducer;
