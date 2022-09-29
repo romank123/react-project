@@ -1,31 +1,47 @@
-import { useEffect, useState } from "react";
-import "./App.css";
-import { Route, Link, Routes } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  createAddMessageRequest,
+  createRemoveMessageRequest,
+  getMessagesLoadingStatusSelector,
+  getMessagesSelector,
+} from "./store/message";
+import styles from "./styles.module.css";
 
-import Home from "./components/Home";
-import Profile from "./components/Profile";
+import { SendMessageForm } from "./components/SendMessageForm";
+import { SendMessageFormHOC } from "./containers/SendMessageFormHOC";
+
+const SendMessageFormWithHOC = SendMessageFormHOC(SendMessageForm);
+
+const MessageItem = ({ message, onRemove }) => (
+  <div className={styles.messageItem}>
+    {message}
+    <button onClick={onRemove}>x</button>
+  </div>
+);
+
+const MessageList = ({ messages, onRemove }) => (
+  <div className={styles.messageList}>
+    {messages.map(({ message, id }) => (
+      <MessageItem key={id} message={message} onRemove={onRemove(id)} />
+    ))}
+  </div>
+);
 
 function App() {
-  return (
-    <div>
-      <div className='menu'>
-        <ul>
-          <li>
-            <Link to='/'>Главная</Link>
-          </li>
-          <li>
-            <Link to='/profile'>Профиль</Link>
-          </li>
-        </ul>
-      </div>
+  const messages = useSelector(getMessagesSelector);
+  const isLoading = useSelector(getMessagesLoadingStatusSelector);
+  const dispatch = useDispatch();
 
-      <div>
-        <Routes>
-          <Route exact path='/' element={<Home />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='*' element={<Home />} />
-        </Routes>
-      </div>
+  const onRemove = (id) => () => dispatch(createRemoveMessageRequest(id));
+  const onAddMessage = (message) => {
+    const fn = createAddMessageRequest({ message, id: Date.now() });
+    dispatch(fn);
+  };
+
+  return (
+    <div className={styles.wrapper}>
+      <SendMessageFormWithHOC isLoading={isLoading} onSend={onAddMessage} />
+      <MessageList messages={messages} onRemove={onRemove} />
     </div>
   );
 }
