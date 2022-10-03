@@ -1,5 +1,4 @@
-import {useEffect, useState} from "react";
-
+import { useEffect, useState } from "react";
 
 /**
  * @param {Object} props
@@ -19,7 +18,7 @@ import {useEffect, useState} from "react";
  * он лишь демонстрирует принцип того как можно абстрагировать
  * выполнение запроса и хранение данных о состоянии запроса
  * */
-export const useRequestApi = ({url, options, isAutoLoad}) => {
+export const useRequestApi = ({ url, options, isAutoLoad }) => {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState();
   const [data, setData] = useState();
@@ -28,26 +27,24 @@ export const useRequestApi = ({url, options, isAutoLoad}) => {
     try {
       setError(undefined);
       setData(undefined);
-      setLoading(true)
+      setLoading(true);
       const response = await fetch(url, options);
 
       const result = await response.json();
 
       setData(result);
-
     } catch (e) {
       setError(e);
       console.dir(e);
     }
     setLoading(false);
-  }
+  };
 
   useEffect(() => {
     if (isAutoLoad) {
       makeRequest();
     }
-  }, [])
-
+  }, []);
 
   return [
     {
@@ -55,6 +52,6 @@ export const useRequestApi = ({url, options, isAutoLoad}) => {
       error,
       data,
     },
-    makeRequest
-  ]
-}
+    makeRequest,
+  ];
+};
