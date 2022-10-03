@@ -1,26 +1,15 @@
-import { createStore, combineReducers, compose, applyMiddleware } from "redux";
-import { persistStore, persistReducer } from "redux-persist";
-import thunk from "redux-thunk";
-import storage from "redux-persist/lib/storage";
-import { messageReducer } from "./message"; // defaults to localStorage for web
-
-const persistConfig = {
-  key: "root",
-  storage,
-};
+import {createStore, combineReducers, compose, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
+import {commentsReducer} from './comments';
 
 const rootReducer = combineReducers({
-  messages: messageReducer,
-});
+  comments: commentsReducer,
+})
 
-/**
- * либо берем функцию compose из redux devtools либо из библиотеки redux
- * */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export const store = createStore(
-  persistReducer(persistConfig, rootReducer),
-  composeEnhancers(applyMiddleware(thunk))
-);
 
-export const persistor = persistStore(store);
+
+export const store = createStore(rootReducer, composeEnhancers(
+  applyMiddleware(thunk),
+))
