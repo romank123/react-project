@@ -1,17 +1,12 @@
-import { Switch, Route } from "react-router-dom";
-import { Comments } from "./pages/Comments";
-import { Home } from "./pages/Home";
-import { Post } from "./pages/Post";
+import {Layout} from "./components/Layout";
+import {Routes} from "./pages/Routes";
 
 function App() {
+
   return (
-    <div className='App'>
-      <Switch>
-        <Route path='/post/:postId' component={Post} />
-        <Route path='/comments/:postId' component={Comments} />
-        <Route path='/' component={Home} />
-      </Switch>
-    </div>
+    <Layout className="App">
+      <Routes/>
+    </Layout>
   );
 }
 

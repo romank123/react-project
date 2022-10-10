@@ -1,72 +1,23 @@
-import React, {useEffect, useState} from 'react';
-import {useParams, Redirect, Link} from "react-router-dom";
-import {ENDPOINT, ENDPOINTS} from "../../api";
+import React from 'react';
+import {useParams, Link} from "react-router-dom";
+import {useSelector} from "react-redux";
+
+import {getPostById} from "../../store/post/selectors";
 
 
-export const Post = (props) => {
-  const {postId} = useParams();
-
-  const [isLoading, setLoading] = useState(false);
-  const [error, setError] = useState();
-  const [data, setData] = useState({});
-
-  const url = [
-    ENDPOINT,
-    ENDPOINTS.postById.replace(
-      ':postId',
-      postId
-    )
-  ].join('');
-
-  const getPost = async () => {
-
-    try {
-      setError(undefined);
-      setLoading(true)
-
-      const response = await fetch(url)
-
-      const result = await response.json();
-
-      setData(result);
-
-    } catch (e) {
-      setError(e);
-      console.dir(e);
-    }
-
-    setLoading(false);
-  }
-
-
-  useEffect(() => {
-    getPost();
-  }, [])
-
-  if (isLoading) {
-    return <div>loading...</div>
-  }
-
-  if (error) {
-    return <div>{error.toString()}</div>
-  }
-
-  if (!data) {
-    return <div>empty data</div>
-  }
-
-  if (!postId) {
-    return <Redirect to="/"/>
-  }
+export const Post = () => {
+  const  {postId} = useParams();
+  const post = useSelector(getPostById(postId));
 
   return (
     <div>
-      <h5>userId: {data.userId}</h5>
-      <h4>{data.title}</h4>
-      <p>{data.body}</p>
-      <Link to={`/comments/${data.id}`}>
-        open post
+      <Link to={`/updatePost/${postId}`}>
+        edit
       </Link>
+      <h1># {post.title}</h1>
+      <p>
+        {post.content}
+      </p>
     </div>
   );
 };
