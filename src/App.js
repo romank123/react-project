@@ -1,12 +1,34 @@
-import {Layout} from "./components/Layout";
-import {Routes} from "./pages/Routes";
+import {BrowserRouter, Link, Route, Switch} from 'react-router-dom';
+import {routerConfig} from "./pages/routerConfig";
+
 
 function App() {
-
   return (
-    <Layout className="App">
-      <Routes/>
-    </Layout>
+    <BrowserRouter>
+      <div className="App">
+        <header>
+          <nav>
+            <ul>
+              {
+                routerConfig.map((route, index) => (<li key={route.path}>
+                  <Link to={route.path}>
+                    {route.name}
+                  </Link>
+                </li>))
+              }
+            </ul>
+          </nav>
+        </header>
+        <main>
+          <Switch>
+            {
+              routerConfig.map((route, index) => (
+                <Route {...route} key={route.path}/>))
+            }
+          </Switch>
+        </main>
+      </div>
+    </BrowserRouter>
   );
 }
 

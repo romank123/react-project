@@ -1,5 +1,5 @@
 {
-  "name": "lesson-9",
+  "name": "lesson-10",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -7,11 +7,12 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "env-cmd": "^10.1.0",
-    "firebase": "^8.9.0",
+    "firebase": "8.9.0",
+    "firebase-mock": "^2.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
-    "react-router-dom": "^5.2.0",
+    "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
@@ -40,5 +41,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/react-hooks": "^7.0.1",
+    "redux-mock-store": "^1.5.4"
   }
 }

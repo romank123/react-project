@@ -1,3 +1,4 @@
 
 export * from './firebase';
-export * from './request/posts';
+export * from './request/players';
+export * from './request/user';
